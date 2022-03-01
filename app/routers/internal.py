@@ -14,7 +14,7 @@ router = APIRouter(
 trnx='intern'
 
 @router.get("/")
-def basic_bulk_tranx(db: Session = Depends(get_db), current_user:int = Depends(oauth2.get_current_user)):
+def basic_bulk_tranx(db: Session = Depends(get_db)):
   list_data = []
 
   url = f'https://api.etherscan.io/api?module=account&action=txlistinternal&address={address_list[0]}&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey={api_key}'
@@ -49,7 +49,7 @@ def basic_bulk_tranx(db: Session = Depends(get_db), current_user:int = Depends(o
 
 
 @router.get('/all-stats')
-def get_stats(db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
+def get_stats(db: Session = Depends(get_db)):
   stats = db.query(models.Statistic).all()
   return stats
 
