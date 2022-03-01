@@ -8,21 +8,20 @@ from . import models
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-models.Base.metadata.create_all(bind=engine)
+# models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
-
 ## Connect to DB:
-while True:
-  try:
-    conn = psycopg2.connect(host='localhost', database='bmw', user='postgres', password='root12', cursor_factory= RealDictCursor)
-    cursor = conn.cursor()
-    print('Database connection was successful')
-    break
-  except Exception as error:
-    print("Connecting to Database failed")
-    print("Error: ", error)
-    time.sleep(2)
+# while True:
+#   try:
+#     conn = psycopg2.connect(host='localhost', database='bmw', user='postgres', password='root12', port="5433", cursor_factory= RealDictCursor)
+#     cursor = conn.cursor()
+#     print('Database connection was successful')
+#     break
+#   except Exception as error:
+#     print("Connecting to Database failed")
+#     print("Error: ", error)
+#     time.sleep(2)
 
 
 
