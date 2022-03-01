@@ -4,11 +4,12 @@ from datetime import datetime, timedelta
 from app import database, schemas, models
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
+from .config import settings
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
 
 # SECRET KEY
-SECRET_KEY = "0347c32adcecf6a20b9f92c8b562e650edaa338c1f5aef39011d6de29650fdfa"
+SECRET_KEY = settings.secret_key
 # ALGORITHM USED
 ALGORITHM = "HS256"
 # EXPIRATION TIME
