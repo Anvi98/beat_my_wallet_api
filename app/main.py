@@ -1,28 +1,24 @@
-import time
 from fastapi import FastAPI, APIRouter
 from . collect import *
 from . utils import *
 from . routers import erc20, internal, user, auth
 from .database import engine
 from . import models
-import psycopg2
-from psycopg2.extras import RealDictCursor
+from fastapi.middleware.cors import CORSMiddleware
 
 # models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
-## Connect to DB:
-# while True:
-#   try:
-#     conn = psycopg2.connect(host='localhost', database='bmw', user='postgres', password='root12', port="5433", cursor_factory= RealDictCursor)
-#     cursor = conn.cursor()
-#     print('Database connection was successful')
-#     break
-#   except Exception as error:
-#     print("Connecting to Database failed")
-#     print("Error: ", error)
-#     time.sleep(2)
-
+# For now, we'll allow all CORS, but we'll talk about it on meeting
+origins = ["*"]
+app = FastAPI()
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins= origins,
+  allow_credentials=True,
+  allow_methods=["*"],
+  allow_headers=["*"],
+)
 
 
 app.include_router(erc20.router)
